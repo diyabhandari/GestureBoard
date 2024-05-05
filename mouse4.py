@@ -24,6 +24,7 @@ while True:
   if hands:
     lmList1 = hands[0]['lmList'] #store all 21 landmarks of the first hand detected in a list
     ind_x,ind_y = lmList1[8][0],lmList1[8][1] #8 - > index finger, 0 and 1 give coordinates
+    mid_x,mid_y = lmList1[12][0],lmList1[12][1]
     #encircle tip to highlight it
     cv2.circle(image,(ind_x,ind_y),5,(0,255,255),2)
     fingers = detector.fingersUp(hands[0])
@@ -32,6 +33,7 @@ while True:
     #because we flipped the livestream, it examines the left hand as it would the right, when thumb is open itll detect it as closed
     #indexing of fingers array starts from thumb
 
+    #drag
     if fingers[0] == 1 and fingers[1] == 1 and fingers[2] == 0:
       #didnt specify for 3,4 cuz you cant have 2 closed but those oepn
       #conv coordinates of tip of index finger wrt screen size of the device
@@ -39,6 +41,12 @@ while True:
       conv_y = int(interp(ind_y,(frameR,cap_h-frameR),(0,GetSystemMetrics(1))))
       ##pass new coordinates 
       mouse.move(conv_x,conv_y)
+
+    #click when index and middle finger are close
+    if fingers[1]==1 and fingers[2] == 1 and fingers[0] ==1:
+      if abs(ind_x-mid_x)<25:
+        mouse.click(button="left")
+
 
 
   cv2.imshow("mouse4",image)
