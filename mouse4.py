@@ -3,7 +3,7 @@ from cvzone.HandTrackingModule import HandDetector #pip install cvzone (see gith
 import mouse #pip install mouse
 from numpy import interp
 from win32api import GetSystemMetrics
-
+#turn off frame
 detector = HandDetector(detectionCon=0.9,maxHands=1) ##detection confidence
 
 cap = cv2.VideoCapture(0)
@@ -11,7 +11,7 @@ cap_w = 640
 cap_h = 480
 cap.set(3,cap_w) #3-> width 4->height of video capture object
 cap.set(4,cap_h)
-frameR = 50 #to solve jittering near the edges of the display window, we'll reduce its size by this much
+frameR = 110 #to solve jittering near the edges of the display window, we'll reduce its size by this much
 while True:
   success,image = cap.read()
   image = cv2.flip(image,1)
