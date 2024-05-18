@@ -1,4 +1,6 @@
 import cv2
+import threading
+import time
 from cvzone.HandTrackingModule import HandDetector #pip install cvzone (see github repo)
 import mouse #pip install mouse
 from numpy import interp
@@ -6,12 +8,25 @@ from win32api import GetSystemMetrics
 #turn off frame
 detector = HandDetector(detectionCon=0.9,maxHands=1) ##detection confidence
 
+
 cap = cv2.VideoCapture(0)
 cap_w = 640
 cap_h = 480
 cap.set(3,cap_w) #3-> width 4->height of video capture object
 cap.set(4,cap_h)
-frameR = 70 #to solve jittering near the edges of the display window, we'll reduce its size by this much
+frameR = 100 #to solve jittering near the edges of the display window, we'll reduce its size by this much
+l_delay =0 #1 when left click, turns back to 0 when set time after click is elapsed
+#this will solve multiple clicks, as there was no time put after each click it kept detecting a single click as many
+def l_click_delay():
+  global l_delay
+  global l_click_thread #brought inside the scope of this function by declaring as global
+  time.sleep(1)
+  l_delay=0 #set to 0 after 1 sec, means we can left click again after 1 sec
+  l_click_thread = threading.Thread(target=l_click_delay)
+  
+l_click_thread = threading.Thread(target=l_click_delay)
+
+
 while True:
   success,image = cap.read()
   image = cv2.flip(image,1)
@@ -45,10 +60,10 @@ while True:
     #click when index and middle finger are close
     if fingers[1]==1 and fingers[2] == 1 and fingers[0] ==1:
       if abs(ind_x-mid_x)<25:
-        mouse.click(button="left")
-
-
-
+        if l_delay==0:
+          mouse.click(button="left")
+          l_delay=1
+          l_click_thread.start()
   cv2.imshow("mouse4",image)
   key = cv2.waitKey(100)
   if key ==27:
