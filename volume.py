@@ -1,6 +1,11 @@
 import cv2
 from cvzone.HandTrackingModule import HandDetector
+import subprocess
 ##from numpy import interp
+def set_vol_up():
+  subprocess.run(["powershell","-ExecutionPolicy", "Bypass", "-File", r"C:\Users\diyab\Desktop\GestureBoard\scripts\volume_increase.ps1"])
+def set_vol_down():
+  subprocess.run(["powershell","-ExecutionPolicy", "Bypass", "-File", r"C:\Users\diyab\Desktop\GestureBoard\scripts\volume_decrease.ps1"])
 def volume_control():
   detector = HandDetector(detectionCon=0.9,maxHands=1) ##detection confidence
   cap = cv2.VideoCapture(0)
@@ -18,8 +23,10 @@ def volume_control():
       thumb_y= lmList1[4][1]
       fingers = detector.fingersUp(hands[0]) # fingers that are up or down in the first hand that appears on cam
       if fingers[0]==0 and fingers[1]==0 and fingers[2]==0 and fingers[3]==0 and fingers[4]==0:
-        print("volume up")
+        set_vol_up()
+        #print("volume up")
       if fingers[0]==1 and fingers[1]==0 and fingers[2]==0 and fingers[3]==0 and fingers[4]==0: #thumb flipped, 1 -> its down
+        set_vol_down()
         print("volume down")  
     cv2.imshow("GestureBoard",image)
     key = cv2.waitKey(100)
