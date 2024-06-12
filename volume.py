@@ -7,7 +7,7 @@ def set_vol_up():
 def set_vol_down():
   subprocess.run(["powershell","-ExecutionPolicy", "Bypass", "-File", r"C:\Users\diyab\Desktop\GestureBoard\scripts\volume_decrease.ps1"])
 def volume_control():
-  detector = HandDetector(detectionCon=0.9,maxHands=1) ##detection confidence
+  detector = HandDetector(detectionCon=0.6,maxHands=1) ##detection confidence, needs to be low for faster reponse here
   cap = cv2.VideoCapture(0)
   while True:
     success,image = cap.read()
@@ -27,7 +27,7 @@ def volume_control():
         #print("volume up")
       if fingers[0]==1 and fingers[1]==0 and fingers[2]==0 and fingers[3]==0 and fingers[4]==0: #thumb flipped, 1 -> its down
         set_vol_down()
-        print("volume down")  
+        #print("volume down")  
     cv2.imshow("GestureBoard",image)
     key = cv2.waitKey(100)
     if key ==27:
