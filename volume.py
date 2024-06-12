@@ -1,7 +1,6 @@
 import cv2
 from cvzone.HandTrackingModule import HandDetector
 import subprocess
-##from numpy import interp
 def set_vol_up():
   subprocess.run(["powershell","-ExecutionPolicy", "Bypass", "-File", r"C:\Users\diyab\Desktop\GestureBoard\scripts\volume_increase.ps1"])
 def set_vol_down():
