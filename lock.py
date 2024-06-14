@@ -19,9 +19,6 @@ def lock_system():
         if hands:
             lmList1 = hands[0]['lmList']
             fingers = detector.fingersUp(hands[0])
-            mid_x = lmList1[12][0]
-            thumb_x = lmList1[4][0]
-
             if fingers[0] == 1 and fingers[1] == 1 and fingers[3] == 1 and fingers[4] == 1 and fingers[2] == 0:
                 if gesture_up_time ==0:
                     gesture_up_time = time.time() #amount of time the gesture is up
