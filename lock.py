@@ -25,9 +25,9 @@ def lock_system():
                 elif time.time() - gesture_up_time >= function_delay:
                     set_lock()
             else:
-                gesture_up_time == 0  #reset  if the gesture is not maintained
+                gesture_up_time = 0  #reset  if the gesture is not maintained
         else:
-            gesture_up_time ==0  #reset  if no hands are detected
+            gesture_up_time =0  #reset  if no hands are detected
 
         cv2.imshow("GestureBoard", image)
         key = cv2.waitKey(100)
