@@ -1,0 +1,1 @@
+shutdown.exe /r /f #f force closes open applications
