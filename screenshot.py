@@ -1,12 +1,9 @@
 import cv2
 from cvzone.HandTrackingModule import HandDetector
 import pyautogui
+from datetime import datetime
 
 def screenshot_func():
-    gesture_up_time = 0
-    gesture_down_time = 0
-    function_delay = 1
-    brightness = 50
     detector = HandDetector(detectionCon=0.6, maxHands=1)
     cap = cv2.VideoCapture(0)
     while True:
@@ -17,14 +14,16 @@ def screenshot_func():
             fingers = detector.fingersUp(hands[0])
             lmList = hands[0]['lmList']
             # Screenshot gesture
-            ##file name must be passed for the screenshot to be saved, otherwise the function will simply return an image object
-            if fingers == [1, 1, 1, 1, 1]:  # All fingers up
-                pyautogui.screenshot("image1.png")
-                print("Screenshot taken")
+            if fingers == [1, 1, 1, 1, 0]:  # first 4 fingers up
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                filename = f"image_{timestamp}.png"
+                im1 = pyautogui.screenshot(filename)
+                print(f"Screenshot taken: {filename}")
         cv2.imshow("GestureBoard", image)
         key = cv2.waitKey(100)
         if key == 27:  # ESC key to exit
             break
     cap.release()
     cv2.destroyAllWindows()
+
 screenshot_func()
