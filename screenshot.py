@@ -21,7 +21,7 @@ def screenshot_func():
                 current_time = time.time()
                 if current_time - ss_delay >= ss_delay_duration:
                     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                    filename = f"image_{timestamp}.png"
+                    filename = f"image_{timestamp}.png" #formatted string
                     im1 = pyautogui.screenshot(filename)
                     print(f"Screenshot taken: {filename}")
                     ss_delay = current_time
