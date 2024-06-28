@@ -24,23 +24,23 @@ def volume_control():
         if hands:
             fingers = detector.fingersUp(hands[0])
             
-            if fingers == [0, 0, 0, 0, 0]:  # All fingers down
+            if fingers == [0, 0, 0, 0, 0]:  #sideways thumbs up
                 if gesture_up_time == 0:
                     gesture_up_time = time.time()
                 elif time.time() - gesture_up_time >= function_delay:
                     set_vol_up()
-                    gesture_up_time = 0  # Reset after performing the action
+                    gesture_up_time = 0  #reset after performing the action
             else:
-                gesture_up_time = 0  # Reset if the gesture is not held
+                gesture_up_time = 0  #reset if the gesture is not held
 
-            if fingers == [1, 0, 0, 0, 0]:  # Only thumb up
+            if fingers == [1, 0, 0, 0, 0]:  #all fingers down
                 if gesture_down_time == 0:
                     gesture_down_time = time.time()
                 elif time.time() - gesture_down_time >= function_delay:
                     set_vol_down()
-                    gesture_down_time = 0  # Reset after performing the action
+                    gesture_down_time = 0  #reset after performing the action
             else:
-                gesture_down_time = 0  # Reset if the gesture is not held
+                gesture_down_time = 0  #reset if the gesture is not held
 
         cv2.imshow("GestureBoard", image)
         key = cv2.waitKey(100)
