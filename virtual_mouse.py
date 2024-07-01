@@ -25,6 +25,7 @@ def virtual_mouse():
   l_click_time = 0
   click_delay_duration = 1 # 1 second delay
   r_click_time = 0
+  up_scroll_gesture =0
 
   while True:
     success, image = cap.read()
@@ -74,9 +75,16 @@ def virtual_mouse():
           if current_time - r_click_time >= click_delay_duration: # there should be at least 1 second between two clicks
             mouse.click(button="right")
             r_click_time = current_time 
-            
+
+      #scroll
+      if fingers==[0, 1, 1, 0, 0]:
+        if abs(ind_x-mid_x) < 25:
+          mouse.wheel(delta=-1) #scroll down when index and middle finger distance is closed, while thumb is also up
+        #if these 3 fingers are up for atleast 2 seconds when index and middle fingers are apart, scroll up
+        if abs(ind_x-mid_x) > 50:
+            mouse.wheel(delta=1) 
     cv2.imshow("mouse4", image)
-    key = cv2.waitKey(100)
+    key = cv2.waitKey(1)
     if key == 27: # ESC key to exit
       break
   cap.release()
