@@ -10,7 +10,7 @@ def screenshot_func(image, ss_time, hands, detector):
         fingers = detector.fingersUp(hands[0])
         lmList = hands[0]['lmList']
         # Screenshot gesture
-        if fingers == [1, 1, 1, 1, 0]:  # first 4 fingers up
+        if fingers == [1, 1, 1, 1, 0]:  # first 3 fingers up
             current_time = time.time()
             if current_time - ss_time >= function_delay: #there should be atleast 5 seconds between 2 screenshots
                 print(f"Current time: {current_time}, Last screenshot time: {ss_time}")
