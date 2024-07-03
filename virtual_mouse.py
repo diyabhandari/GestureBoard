@@ -30,5 +30,12 @@ def virtual_mouse(image, l_click_time,r_click_time, hands, detector):
           if abs(mid_x-ring_x)<40 and time.time()-r_click_time >1:
               mouse.click(button="right")
               r_click_time = time.time()
-              
+      #scroll
+      #scroll
+      if fingers==[0, 1, 1, 0, 0]:
+        if abs(ind_x-mid_x) < 25:
+          mouse.wheel(delta=-1) #scroll down when index and middle finger distance is closed, while thumb is also up
+        #if these 3 fingers are up for atleast 2 seconds when index and middle fingers are apart, scroll up
+        if abs(ind_x-mid_x) > 50:
+            mouse.wheel(delta=1)
   return image, l_click_time
