@@ -10,7 +10,7 @@ def lock_system(image, lock_gesture_up, hands, detector):
     function_delay=2
     if hands:
         fingers = detector.fingersUp(hands[0])
-        if fingers == [1, 1, 0, 1, 1]:  # Specific gesture for locking system
+        if fingers == [1, 1, 0, 1, 1]:  #flick type pose with middle finger down
             if lock_gesture_up == 0:
                 lock_gesture_up = time.time()  # Start timing the gesture
             elif time.time() - lock_gesture_up >= function_delay:
