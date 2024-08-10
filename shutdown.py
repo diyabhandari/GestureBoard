@@ -4,7 +4,7 @@ import subprocess
 import time
 
 def set_shut():
-    subprocess.run(["powershell", "-ExecutionPolicy", "Bypass", "-File", r"C:\Users\diyab\Desktop\GestureBoard\scripts\shutdown.ps1"])
+    subprocess.run(["powershell", "-ExecutionPolicy", "Bypass", "-File", r"./scripts/shutdown.ps1"])
 
 def shut_system(image,shut_gesture_up,hands,detector): 
     function_delay = 4  # Time in seconds to wait before performing the function, here locking

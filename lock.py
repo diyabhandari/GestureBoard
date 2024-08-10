@@ -2,9 +2,13 @@ import cv2
 from cvzone.HandTrackingModule import HandDetector
 import subprocess
 import time
+import os
+
+#store directory in variable
+
 
 def set_lock():
-    subprocess.run(["powershell", "-ExecutionPolicy", "Bypass", "-File", r"C:\Users\diyab\Desktop\GestureBoard\scripts\lock.ps1"])
+    subprocess.run(["powershell", "-ExecutionPolicy", "Bypass", "-File",r"./scripts/lock.ps1"])
 
 def lock_system(image, lock_gesture_up, hands, detector):
     function_delay=2

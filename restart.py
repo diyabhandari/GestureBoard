@@ -4,7 +4,7 @@ import subprocess
 import time
 
 def set_restart():
-    subprocess.run(["powershell", "-ExecutionPolicy", "Bypass", "-File", r"C:\Users\diyab\Desktop\GestureBoard\scripts\restart.ps1"])
+    subprocess.run(["powershell", "-ExecutionPolicy", "Bypass", "-File", r"./scripts/restart.ps1"])
 
 def restart_system(image,restart_gesture_up,hands,detector):
     function_delay = 4 # Time in seconds to wait before performing the function, here locking

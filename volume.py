@@ -4,7 +4,7 @@ import subprocess
 import time
 
 def set_vol_up():
-    subprocess.run(["powershell", "-ExecutionPolicy", "Bypass", "-File", r"C:\Users\diyab\Desktop\GestureBoard\scripts\volume_increase.ps1"])
+    subprocess.run(["powershell", "-ExecutionPolicy", "Bypass", "-File", r"./scripts/volume_increase.ps1"])
 
 def set_vol_down():
     subprocess.run(["powershell", "-ExecutionPolicy", "Bypass", "-File", r"C:\Users\diyab\Desktop\GestureBoard\scripts\volume_decrease.ps1"])
